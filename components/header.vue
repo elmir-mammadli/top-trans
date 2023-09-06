@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1>/header/</h1> 
-        <hr />
+        <Navbar />
     </div>
 </template>
+<script setup>
+import Navbar from './Navbar.vue'
+</script>
