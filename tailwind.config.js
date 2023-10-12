@@ -5,6 +5,7 @@ module.exports = {
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
+    'node_modules/preline/dist/*.js',
     "./nuxt.config.{js,ts}",
     "./app.vue",
     "./node_modules/flowbite/**/*.{js,ts}"
@@ -12,14 +13,19 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'inter': ['Inter', 'sans-serif']
+        'inter': ['Inter', 'sans-serif'],
+        'montserrat': ['Montserrat', 'sans-serif']
       },
       colors: {
         primary: '#F5D21B'
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/public/images/main_bg.jpg')",
       }
     },
   },
   plugins: [
+    require("daisyui"),
     require('flowbite/plugin')
   ],
 }

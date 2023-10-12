@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Aside />
         <Navbar />
     </div>
 </template>

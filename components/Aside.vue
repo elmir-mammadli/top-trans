@@ -1,6 +1,6 @@
 <template>
     <div>
-        <aside class="bg-[#453c0f] w-full h-[40px]">
+        <aside class="bg-[#efd034] w-full h-[40px]">
 
         </aside>
     </div>
