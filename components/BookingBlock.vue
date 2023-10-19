@@ -4,7 +4,7 @@
     data-aos="fade-up"
     data-aos-once="true"
     data-aos-duration="600"
-    class="flex flex-col items-center max-w-screen-xl mx-auto my-32">
+    class="flex flex-col items-center max-w-screen-xl mx-auto mt-32">
         <div class="flex flex-col items-center">
             <p class="uppercase text-[16px] text-orange-400 font-bold">Reserve within a minute</p>
             <h1 class="text-[36px] max-w-xl text-gray-800 text-center font-semibold leading-[1.4]">Arrange your airport transfer in&nbsp;few easy steps</h1>

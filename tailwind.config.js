@@ -26,7 +26,8 @@ module.exports = {
   },
   plugins: [
     require("daisyui"),
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('@headlessui/tailwindcss')({ prefix: 'ui' })
   ],
 }
 

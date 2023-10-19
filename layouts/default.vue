@@ -1,5 +1,6 @@
 <template>
     <div class="bg-white page__wrap">
+        <Modal />
         <Header />
       <slot />
       <!-- <Footer /> -->
@@ -25,16 +26,13 @@ import Aos from 'aos';
 @media screen and (min-width: 120.0625em) {
   .page__wrap {
     box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
   }
 }
 
 .page__wrap {
-  height: auto;
-  margin: 0 auto;
-  max-width: 120rem;
+  font-family: 'Poppins', sans-serif;
   min-width: 300px;
-  padding: 0 20px;
-  overflow: hidden;
   width: 100%;
 }
   </style>

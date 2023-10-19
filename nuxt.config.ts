@@ -5,11 +5,16 @@ export default defineNuxtConfig({
     '~/assets/css/main.css',
     '@mdi/font/css/materialdesignicons.min.css'
   ],
-  vuetify: {
-    moduleOptions: {
-      treeshaking: true
-    }
-  },
+  modules: [
+    'nuxt-headlessui',
+    'nuxt-icon'
+  ],
+  headlessui: {
+    prefix: 'Headless'
+},
+plugins: [
+  { src: '~/plugins/aos', mode: 'client' },
+],
   build: {
     transpile: ['vuetify'],
   },
