@@ -11,7 +11,7 @@
   </a>
 <NavItems />
 <div class="flex relative z-10">
-  <!-- <NavbarLanguage /> -->
+  <NavbarLanguage />
   <button class="bg-orange-500 text-white font-semibold text-[15px] px-7 py-2.5 rounded-xl hover:bg-orange-600 transition .4s ease-all">
                     Book a Ride
   </button>

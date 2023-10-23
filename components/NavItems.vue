@@ -39,7 +39,7 @@ const items = [
     },
     {
         item: $t('navbar.faq'),
-        link: '/faq'
+        link: '#faq'
     },
     {
         item: $t('navbar.contact'),

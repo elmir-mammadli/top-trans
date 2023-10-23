@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full py-[120px]">
+    <div id="faq" class="w-full py-[120px]">
         <div class="flex flex-col items-center mb-[40px]">
             <p class="uppercase text-[16px] text-orange-400 font-bold">Frequently Asked Questions</p>
             <h1 class="text-[36px] max-w-xl text-gray-800 text-center font-semibold leading-[1.4]">Your most common questions answered here</h1>

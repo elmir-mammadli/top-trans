@@ -10,5 +10,6 @@
     </main>
 </template>
 <script lang="ts" setup>
-import Disclosure from '~/components/Disclosure.vue';
+import Disclosure from '~/components/FAQ.vue';
+
 </script>

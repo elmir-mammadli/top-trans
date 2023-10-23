@@ -3,14 +3,22 @@ export default defineNuxtConfig({
   css: [
     'vuetify/lib/styles/main.sass',
     '~/assets/css/main.css',
-    '@mdi/font/css/materialdesignicons.min.css'
+    '@mdi/font/css/materialdesignicons.min.css',
+    'primevue/resources/themes/lara-light-blue/theme.css',
+    'primevue/resources/primevue.css',
   ],
   modules: [
+    '@notkamui/nuxt-primevue',
     'nuxt-headlessui',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@vee-validate/nuxt'
   ],
   headlessui: {
     prefix: 'Headless'
+},
+primevue: {
+  includeChart: true, // default: false
+  includeEditor: true,
 },
 plugins: [
   { src: '~/plugins/aos', mode: 'client' },
