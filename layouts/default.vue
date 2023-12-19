@@ -1,9 +1,9 @@
 <template>
     <div class="bg-white page__wrap">
-        <Modal />
+        <Aside />
         <Header />
       <slot />
-      <!-- <Footer /> -->
+      <Footer />
     </div>
   </template>
 
@@ -11,7 +11,9 @@
   import AOS from 'aos'
   import { onMounted } from 'vue'
   import { initFlowbite } from 'flowbite';
-import Aos from 'aos';
+  import { useI18n } from 'vue-i18n';
+
+  const { t: $t } = useI18n()
   
   onBeforeMount(() => {
     AOS.init()

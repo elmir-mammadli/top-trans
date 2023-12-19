@@ -8,17 +8,18 @@ export default defineNuxtConfig({
     'primevue/resources/primevue.css',
   ],
   modules: [
-    '@notkamui/nuxt-primevue',
+    "@nuxt/image",
+    "nuxt-primevue",
     'nuxt-headlessui',
     'nuxt-icon',
-    '@vee-validate/nuxt'
+    '@vee-validate/nuxt',
+    '@nuxtjs/i18n'
   ],
+  i18n: {
+    vueI18n: './plugins/i18n.config.ts',
+  },
   headlessui: {
     prefix: 'Headless'
-},
-primevue: {
-  includeChart: true, // default: false
-  includeEditor: true,
 },
 plugins: [
   { src: '~/plugins/aos', mode: 'client' },
@@ -39,18 +40,32 @@ plugins: [
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
           rel: 'stylesheet'
         },
-        // Montserrat font
+        // Poppins font
         {
           href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
           rel: 'stylesheet'
         },
       ],
-    }
+      script: [
+        {
+          hid: 'tawkto',
+          src: 'https://embed.tawk.to/65381772a84dd54dc484c68a/1hdhhn65v',
+          defer: true,
+          crossorigin: 'anonymous',
+        }
+    ]
+    },
   },
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
-  }
+  },
+  image: {
+    provider: 'imagekit',
+    imagekit: {
+      baseURL: 'https://ik.imagekit.io/transfervan'
+    }
+  },
 })

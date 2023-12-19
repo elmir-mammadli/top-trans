@@ -6,15 +6,15 @@
       <div class="flex flex-wrap items-center justify-between mx-auto pt-8">
       <a href="/" class="flex items-center z-10">
       <span class="text-[28px] tracking-[-0px] text-gray-800">
-        <span class="font-bold">transfer</span><span class="lowercase font-normal">van</span>
+        <span class="font-semibold text-gray-800">taxi</span><span class="font-semibold text-orange-400">2</span><span class="lowercase font-semibold">airport</span>
       </span>
   </a>
 <NavItems />
-<div class="flex relative z-10">
-  <NavbarLanguage />
+<div class="flex relative z-10 items-center gap-x-4">
   <button class="bg-orange-500 text-white font-semibold text-[15px] px-7 py-2.5 rounded-xl hover:bg-orange-600 transition .4s ease-all">
-                    Book a Ride
+                    {{ $t('navbar.button')  }}
   </button>
+  <NavbarLanguage />
 </div>
   </div>
 </nav>
@@ -23,7 +23,7 @@
 </template>
 <script lang="ts" setup>
 import NavItems from './NavItems.vue';
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import NavbarLanguage from './NavbarLanguage.vue';
 
 const resize = ref(false)

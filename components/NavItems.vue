@@ -20,22 +20,18 @@ import { useI18n } from 'vue-i18n';
 
 const { t: $t } = useI18n()
 
-const items = [
-{
-        item: $t('navbar.home'),
-        link: '/'
-    },
-    {
-        item: $t('navbar.about'),
-        link: '/about'
-    },
+const items = computed(() => [
     {
         item: $t('navbar.services'),
         link: '/services'
     },
     {
         item: $t('navbar.price'),
-        link: '/price'
+        link: '/about'
+    },
+    {
+        item: $t('navbar.about'),
+        link: '/about'
     },
     {
         item: $t('navbar.faq'),
@@ -45,6 +41,6 @@ const items = [
         item: $t('navbar.contact'),
         link: '/contact'
     }
-]
+])
 
 </script>

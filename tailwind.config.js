@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
-        'montserrat': ['Montserrat', 'sans-serif']
+        'poppins': ['Montserrat', 'sans-serif']
       },
       colors: {
         primary: '#F5D21B'

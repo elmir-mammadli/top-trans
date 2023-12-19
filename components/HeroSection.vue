@@ -1,27 +1,27 @@
 <template>
     <div class="relative max-w-screen-xl mx-auto mt-16">
         <div
-        class="relative flex flex-row justify-start items-center z-30">
+        class="relative flex flex-row justify-between items-center z-30">
             <div 
             loading="lazy"
             data-aos="fade-right"
             data-aos-duration="600"
             class="flex flex-col items-start">
                 <h1
-                class="text-[72px] font-bold max-w-xl text-gray-800 leading-[80px]">
-                    <!-- Your <span class="text-green-400">Destination</span>, Our <span class="text-blue-500">Commitment</span>. -->
-                    Have your <span  class="text-orange-400">best&nbsp;transfer</span>
-                </h1>
-                <p class="mt-4 max-w-xl text-gray-700 font-normal text-[20px]">Fast, safe and easiest transfer services <span class="font-bold">in Prague.</span> </p>
+                v-html="$t('hero.title')"
+                class="text-[72px] font-bold max-w-xl text-gray-800 leading-[80px]" />
+                <p 
+                v-html="$t('hero.subtitle')"
+                class="mt-4 max-w-xl text-gray-700 font-normal text-[20px]"/>
                 <div 
                 class="flex gap-x-5">
                     <button 
                     @click="triggerShake" 
                     class="bg-orange-500 text-white font-semibold text-[18px] px-9 py-3 rounded-xl mt-8 hover:bg-orange-600 transition .4s ease-all">
-                        Let's Go!
-                </button>
+                        {{ $t('button-2') }}
+                  </button>
                 <button class="bg-[#fff] hover:bg-gray-800 text-gray-900 hover:text-[#fff] outline outline-gray-800 font-medium text-[18px] px-9 py-3 rounded-xl mt-8 transition .4s ease-all">
-                    Pricing
+                    FAQ
                 </button>
                 </div>
             </div>
@@ -48,8 +48,13 @@
 </template>
 <script setup lang="ts">
 import Form from './Form.vue';
+import axios from "axios";
+
 
 const shouldShake = ref(false);
+const query = ref('')
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiZWxtaXIyMTgiLCJhIjoiY2xxOGdzeW5zMThpNDJtcDFnMGxueWd1biJ9.QorxNQclJDKwh07MORcl4A'
 
 const triggerShake = () => {
   shouldShake.value = !shouldShake.value; // Toggle the value to trigger the watcher in Form.vue

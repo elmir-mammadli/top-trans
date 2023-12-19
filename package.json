@@ -17,29 +17,31 @@
     "nuxt": "^3.7.1",
     "nuxt-headlessui": "^1.1.4",
     "nuxt-icon": "^0.5.0",
+    "nuxt-primevue": "^0.2.2",
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3"
   },
   "dependencies": {
+    "@formkit/nuxt": "^1.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/vue": "^2.0.18",
     "@mdi/font": "^7.2.96",
     "@notkamui/nuxt-primevue": "^0.5.0",
-    "@nuxtjs/i18n": "^8.0.0-rc.4",
+    "@nuxt/image": "^1.1.0",
+    "@nuxtjs/i18n": "^8.0.0-rc.11",
     "@vee-validate/nuxt": "^4.11.8",
     "@zaptime/vue3": "^1.4.37",
     "aos": "^2.3.4",
     "axios": "^1.5.1",
     "cors": "^2.8.5",
     "daisyui": "^3.7.4",
-    "express": "^4.18.2",
     "flowbite": "^1.8.1",
     "mailgun.js": "^9.3.0",
     "primevue": "^3.37.0",
     "sass": "^1.67.0",
     "vee-validate": "^4.11.7",
     "vue-i18n": "^9.4.1",
-    "vuetify": "^3.3.19"
+    "vuetify": "^3.4.7"
   }
 }
