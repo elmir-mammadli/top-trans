@@ -31,7 +31,6 @@
     "@nuxt/image": "^1.1.0",
     "@nuxtjs/i18n": "^8.0.0-rc.11",
     "@vee-validate/nuxt": "^4.11.8",
-    "@zaptime/vue3": "^1.4.37",
     "aos": "^2.3.4",
     "axios": "^1.5.1",
     "cors": "^2.8.5",
