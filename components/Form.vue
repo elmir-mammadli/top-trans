@@ -216,8 +216,6 @@ const formattedDate = computed(() => {
   return `${day}.${month}.${year}`
 })
 
-console.log('Elmir',);
-
 
 const formatTime = computed(() => {
   let hours = String(pickupTime.value.getHours()).padStart(2, '0')
