@@ -27,8 +27,6 @@ const form: Form = {
   email: ''
 }
 
-const SENDGRID_API_KEY = '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'
-
 const config = useRuntimeConfig()
 
 const handleSubmit = async () => {
