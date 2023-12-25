@@ -20,10 +20,10 @@ export default defineNuxtConfig({
   },
   headlessui: {
     prefix: 'Headless'
-},
-plugins: [
+  },
+  plugins: [
   { src: '~/plugins/aos', mode: 'client' },
-],
+  ],
   build: {
     transpile: ['vuetify'],
   },
@@ -68,4 +68,9 @@ plugins: [
       baseURL: 'https://ik.imagekit.io/transfervan'
     }
   },
+  runtimeConfig: {
+    public: {
+      SENDGRID_API_KEY: process.env.SENDGRID_API_KEY
+    }
+  }
 })

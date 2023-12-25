@@ -44,10 +44,12 @@
             </div>
         </div>
         <Form :triggerShake="shouldShake" />
+        <FormNew />
     </div>
 </template>
 <script setup lang="ts">
 import Form from './Form.vue';
+import FormNew from './FormNew.vue';
 import axios from "axios";
 
 
@@ -59,6 +61,9 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiZWxtaXIyMTgiLCJhIjoiY2xxOGdzeW5zMThpNDJtcDFnMGx
 const triggerShake = () => {
   shouldShake.value = !shouldShake.value; // Toggle the value to trigger the watcher in Form.vue
 };
+
+console.log('Sendgrid', process.env.SENDGRID_API_KEY);
+
 </script>
 
 <style>
