@@ -25,11 +25,11 @@
       <div class="mb-4">
           <label for="from" class="block mb-2 text-sm font-medium text-white">{{ $t('form.from') }}</label>
           <AdressComplete 
-          v-model="firstForm.from" 
+          v-model="formData.from" 
           type="text" 
           name="from" 
           class="w-full p-2 rounded-[8px]" 
-          @address-selected="address => firstForm.from = address.display_name"
+          @address-selected="address => formData.from = address.display_name"
           :coordinates="{
             lat: parentLat,
             lon: parentLon
@@ -40,7 +40,7 @@
       <div class="mb-4">
       <label label for="to" class="block mb-2 text-sm font-medium text-white">{{ $t('form.to') }}</label>
       <AdressComplete 
-      v-model="firstForm.to" 
+      v-model="formData.to" 
       class="w-full p-2 rounded-[8px]" 
       type="text"
      :coordinates="{
@@ -48,7 +48,7 @@
         lon: parentLon
       }" 
       name="to" 
-      @address-selected="address => firstForm.to = address.display_name"
+      @address-selected="address => formData.to = address.display_name"
       />
           <p v-if="selectedAddress">Selected Address: {{ selectedAddress }}</p>
     </div>
@@ -57,20 +57,20 @@
       <div class="flex gap-x-4 w-full">
         <div>
         <label for="date" class="block rounded mb-2 text-sm font-medium text-white">{{ $t('form.date') }}</label>
-        <Calendar v-model="firstForm.formattedDate" class="calendar text-bold max-w-[112px]" dateFormat="dd.mm.yy" placeholder="DD/MM/YYYY" />
+        <Calendar v-model="formData.formattedDate" class="calendar text-bold max-w-[112px]" dateFormat="dd.mm.yy" placeholder="DD/MM/YYYY" />
       </div>
       <div>
         <label for="time" class="block mb-2 text-sm font-medium rounded text-white">{{ $t('form.time') }}</label>
-        <Calendar v-model="firstForm.formatTime" id="calendar-timeonly" class="calendar calendar-timeonly max-w-[85px] input:text-center" placeholder="12:00" timeOnly />
+        <Calendar v-model="formData.formatTime" id="calendar-timeonly" class="calendar calendar-timeonly max-w-[85px] input:text-center" placeholder="12:00" timeOnly />
       </div>
         <div>
         <label label for="passengers" class="block mb-2 text-sm font-medium text-white">{{ $t('form.passengers') }}</label>
-        <InputText id="passengers" v-model="firstForm.passengers" type="number" name="passengers" class="w-[80px] p-2 rounded-[8px]"  placeholder="0" />
+        <InputText id="passengers" v-model="formData.passengers" type="number" name="passengers" class="w-[80px] p-2 rounded-[8px]"  placeholder="0" />
         </div>
       <div class="flex justify-center items-end gap-x-3">
         <div>
         <label for="luggage" class="block mb-2 text-sm font-medium text-white">{{ $t('form.luggage') }}</label>
-        <InputText v-model="firstForm.luggage" type="number" name="luggage" class="w-[80px] p-2 rounded-[8px]" placeholder="0" />
+        <InputText v-model="formData.luggage" type="number" name="luggage" class="w-[80px] p-2 rounded-[8px]" placeholder="0" />
         </div>
       </div>
       </div>
@@ -111,23 +111,23 @@
     <div class="grid grid-cols-3 grid-rows-2 gap-x-8 w-full">
       <div class="relative mb-4">
       <label for="firstName" class="block mb-2 text-sm font-medium text-white">{{ $t('form.name') }}</label>
-      <InputText required v-model="firstForm.firstName" type="text" name="firstName" placeholder="John" class="w-full p-2 rounded-[8px]" />
+      <InputText required v-model="formData.firstName" type="text" name="firstName" placeholder="John" class="w-full p-2 rounded-[8px]" />
       </div>
       <div class="mb-4">
       <label for="firstName" class="block mb-2 text-sm font-medium text-white">{{ $t('form.surname') }}</label>
-      <InputText v-model="firstForm.lastName" type="text" name="lastName" placeholder="Doe" class="w-full p-2 rounded-[8px]" />
+      <InputText v-model="formData.lastName" type="text" name="lastName" placeholder="Doe" class="w-full p-2 rounded-[8px]" />
       </div>
       <div class="mb-4">
       <label for="email" class="block mb-2 text-sm font-medium text-white">{{ $t('form.email') }}</label>
-      <InputText v-model="firstForm.email" type="text" name="email" placeholder="john.doe@mail.com" class="w-full p-2 rounded-[8px]" />
+      <InputText v-model="formData.email" type="text" name="email" placeholder="john.doe@mail.com" class="w-full p-2 rounded-[8px]" />
       </div>
       <div class="mb-4">
       <label for="phoneNumber" class="block mb-2 text-sm font-medium text-white">{{ $t('form.number') }}</label>
-      <InputText v-model="firstForm.phoneNumber" type="tel" autofocus name="phoneNumber" placeholder="+1 (123) 456-7890" class="w-full p-2 rounded-[8px]" />
+      <InputText v-model="formData.phoneNumber" type="tel" autofocus name="phoneNumber" placeholder="+1 (123) 456-7890" class="w-full p-2 rounded-[8px]" />
       </div>
       <div class="mb-4">
       <label for="flightNumber" class="block mb-2 text-sm font-medium text-white">{{ $t('form.flight-number') }}</label>
-      <InputText v-model="firstForm.flightNumber" type="text" name="flightNumber" placeholder="BA1594" class="w-full p-2 rounded-[8px]" />
+      <InputText v-model="formData.flightNumber" type="text" name="flightNumber" placeholder="BA1594" class="w-full p-2 rounded-[8px]" />
       </div>
     </div>
     <div class="grid grid-cols-2">
@@ -183,9 +183,12 @@ import AdressComplete from './AdressComplete.vue';
 import Calendar from 'primevue/calendar/Calendar.vue';
 import CarModel from './CarModel.vue';
 import Checkbox from 'primevue/checkbox/Checkbox.vue';
-
+import type { FormDataVariables } from './data/formData';
+import { FormData } from './data/formData';
+import axios from 'axios';
 const { $t } = useLanguage()
 
+const formData = reactive<FormDataVariables>(FormData)
 
 const reservationData = computed(() => [
   {
@@ -225,70 +228,39 @@ const formatTime = computed(() => {
 
   return `${hours}:${minutes}`
 })
-type FormData = {
-  from: string;
-  to: string;
-  formattedDate: string,
-  formatTime: string;
-  passengers: string
-  luggage: string
-  selectedCar: string
-  email: string
-  firstName: string
-  lastName: string
-  phoneNumber: string
-  flightNumber: string
-  checked: boolean
-};
-
- const firstForm = reactive<FormData>({
-  from: 'Prague Airport',
-  to: 'Papirnikova 617/7',
-  formattedDate: '21.09.2023',
-  formatTime: '18:50',
-  passengers: '3',
-  luggage: '3',
-  selectedCar: 'Econom Sedan',
-  email: 'elmir@ecomail.cz',
-  firstName: '',
-  lastName: 'Mammadli',
-  phoneNumber: '+420777940265',
-  flightNumber: 'BR1234',
-  checked: false
-});
 
 const bookingItems = computed(() => [
   {
     key: $t('form.name'),
-    value: firstForm.firstName
+    value: formData.firstName
   },
   {
     key: $t('form.surname'),
-    value: firstForm.lastName
+    value: formData.lastName
   },
   {
     key: $t('form.email'),
-    value: firstForm.email
+    value: formData.email
   },
   {
     key: $t('form.number'),
-    value: firstForm.phoneNumber
+    value: formData.phoneNumber
   },
   {
     key: $t('form.selected-car'),
-    value: firstForm.selectedCar
+    value: formData.selectedCar
   },
   {
     key: $t('form.flight-number'),
-    value: firstForm.flightNumber
+    value: formData.flightNumber
   },
   {
     key: $t('form.from').toUpperCase(),
-    value: firstForm.from
+    value: formData.from
   },
   {
     key: $t('form.to').toUpperCase(),
-    value: firstForm.to
+    value: formData.to
   },
   {
     key: $t('form.date').toUpperCase(),
@@ -300,61 +272,61 @@ const bookingItems = computed(() => [
   },
   {
     key: $t('form.passengers').toUpperCase(),
-    value: firstForm.passengers
+    value: formData.passengers
   },
   {
     key: $t('form.luggage').toUpperCase(),
-    value: firstForm.luggage
+    value: formData.luggage
   },
 ])
 
 const itemsSchedule = computed(() => [...bookingItems.value.slice(6, 12)])
-// const schedule = computed(() => [
-// {
-//     key: 'FROM:',
-//     value: firstForm.from
-//   },
-//   {
-//     key: 'TO:',
-//     value: firstForm.to
-//   },
-//   {
-//     key: 'DATE:',
-//     value: formattedDate.value
-//   },
-//   {
-//     key: 'TIME:',
-//     value: formatTime.value
-//   },
-//   {
-//     key: 'PASSENGERS:',
-//     value: firstForm.passengers
-//   },
-//   {
-//     key: 'LUGGAGE:',
-//     value: firstForm.luggage
-//   },
-// ])
 const chapter = ref(1)
+const config = useRuntimeConfig()
 
 const updateSelectedCar = (carName: string) => {
-  firstForm.selectedCar = carName
+  formData.selectedCar = carName
 }
 
 const submitForm = async () => {
-  chapter.value += 1;
-        try {
-            const response = await useFetch('/api/submit', {
-                method: 'POST',
-                body: JSON.stringify({
-                  clientEmail: 'elmirmammadli18@gmail.com',
-                  formDetails: firstForm
-                })
-            });
-        } catch (e) {
-          console.log(e);
+    try {
+      const response = await axios.post(
+        'https://api.sendgrid.com/v3/mail/send',
+        {
+          personalizations:[
+            {
+              to: [{ email: 'elmirmammadli18@gmail.com' }],
+              subject: 'Your reservation is confirmed'
+            }
+          ],
+          from: { email: 'booking@taxi2airport.cz' },
+          content: [
+            {
+              type: 'text/html',
+              value: `
+              <h1>Thank you for your reservation</h1>
+              <p>Dear ${formData.firstName} ${formData.lastName},</p>
+              <p>Thank you for your reservation. We will contact you shortly to confirm your booking.</p>
+              <p>Kind regards,</p>
+              <p>Taxi2Airport</p>
+              `
+            }
+          ]
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${config.public.SENDGRID_API_KEY}`
+          }
         }
-    };
+      );
+      console.log(response.data);
+      chapter.value++
+    }
+    catch (error) {
+      console.error('Error submitting error', error);
+    }
+  }
 </script>
 
 <style scoped lang="scss">

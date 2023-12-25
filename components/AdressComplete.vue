@@ -44,7 +44,6 @@
 import InputText from 'primevue/inputtext/InputText.vue';
 import { ref } from 'vue'
 import axios from "axios";
-import { config } from 'dotenv';
 
 const emit = defineEmits()
 const query = ref('')
