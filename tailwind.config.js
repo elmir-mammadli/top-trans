@@ -18,9 +18,6 @@ module.exports = {
       },
       colors: {
         primary: '#F5D21B'
-      },
-      backgroundImage: {
-        'hero-pattern': "url('/public/images/main_bg.jpg')",
       }
     },
   },

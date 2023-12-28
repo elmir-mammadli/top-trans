@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@formkit/nuxt": "^1.4.0",
+    "@formkit/themes": "^1.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/vue": "^2.0.18",
@@ -37,11 +38,9 @@
     "cors": "^2.8.5",
     "daisyui": "^3.7.4",
     "flowbite": "^1.8.1",
-    "mailgun.js": "^9.3.0",
     "primevue": "^3.37.0",
     "sass": "^1.67.0",
     "sendgrid": "^5.2.3",
-    "vee-validate": "^4.11.7",
     "vue-i18n": "^9.4.1",
     "vuetify": "^3.4.7"
   },

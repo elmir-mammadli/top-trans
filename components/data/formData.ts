@@ -15,9 +15,9 @@ export const FormData: FormDataVariables = {
     luggage: '',
     selectedCar: '',
     email: '',
-    firstName: 'Elmir',
-    lastName: 'Mammadli',
-    phoneNumber: '+420777940265',
-    flightNumber: 'BR1234',
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    flightNumber: '',
     checked: false
   }

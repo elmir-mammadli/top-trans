@@ -30,10 +30,6 @@
           name="from" 
           class="w-full p-2 rounded-[8px]" 
           @address-selected="address => formData.from = address.display_name"
-          :coordinates="{
-            lat: parentLat,
-            lon: parentLon
-          }"
           />
           <p v-if="selectedAddress">Selected Address: {{ selectedAddress }}</p>
     </div>
@@ -43,10 +39,6 @@
       v-model="formData.to" 
       class="w-full p-2 rounded-[8px]" 
       type="text"
-     :coordinates="{
-        lat: parentLat,
-        lon: parentLon
-      }" 
       name="to" 
       @address-selected="address => formData.to = address.display_name"
       />
@@ -54,14 +46,35 @@
     </div>
     </div>
     <div class="flex flex-row items-end gap-x-12 w-full">
-      <div class="flex gap-x-4 w-full">
+      <div class="flex gap-x-4 items-end w-full">
         <div>
-        <label for="date" class="block rounded mb-2 text-sm font-medium text-white">{{ $t('form.date') }}</label>
-        <Calendar v-model="formData.formattedDate" class="calendar text-bold max-w-[112px]" dateFormat="dd.mm.yy" placeholder="DD/MM/YYYY" />
+          <FormKit
+          v-model="formData.formattedDate"
+          type="date"
+          :value="requiredDate('today')"
+          :label="$t('form.date')"
+          validation="required"
+          placeholder="DD/MM/YYYY"
+          outer-class="$reset"
+          wrapper-class="$reset"
+          label-class="block font-semibold text-white text-sm"
+          inner-class="$reset bg-white outline-none rounded-lg"
+          input-class="w-full h-10 px-3 border-none text-[14px] text-gray-700 placeholder-gray-400"
+          messages-class="absolute bottom-[5px] text-red-500 text-[10px]"
+          />
       </div>
       <div>
-        <label for="time" class="block mb-2 text-sm font-medium rounded text-white">{{ $t('form.time') }}</label>
-        <Calendar v-model="formData.formatTime" id="calendar-timeonly" class="calendar calendar-timeonly max-w-[85px] input:text-center" placeholder="12:00" timeOnly />
+        <FormKit
+          v-model="formData.formatTime"
+          type="time"
+          value="12:00"
+          :label="$t('form.time')"
+          wrapper-class="$reset"
+          outer-class="$reset"
+          label-class="block font-semibold text-white text-sm"
+          inner-class="$reset bg-white outline-none rounded-lg"
+          input-class="w-full h-10 px-3 border-none text-[14px] text-gray-700 placeholder-gray-400"
+          />
       </div>
         <div>
         <label label for="passengers" class="block mb-2 text-sm font-medium text-white">{{ $t('form.passengers') }}</label>
@@ -75,7 +88,7 @@
       </div>
       </div>
       <div class="w-full">
-        <Button :label="$t('form.search-button')" type="submit" icon="pi pi-check" class="w-full bg-green-500 hover:bg-green-600 p-2 text-white" />
+        <Button @click="chapterChange" :label="$t('form.search-button')" icon="pi pi-check" class="w-full bg-green-500 hover:bg-green-600 p-2 text-white" />
       </div>
     </div>
 </section>
@@ -139,7 +152,7 @@
           </div>
       </div>
     <div class="mb-4">
-        <Button label="Next" type="submit" icon="pi pi-check" class="w-full bg-green-500 hover:bg-green-600 p-2 text-white mt-7" />
+        <Button label="Next" @click="chapter++" icon="pi pi-check" class="w-full bg-green-500 hover:bg-green-600 p-2 text-white mt-7" />
       </div>
     </div>
   </section>
@@ -189,6 +202,24 @@ import axios from 'axios';
 const { $t } = useLanguage()
 
 const formData = reactive<FormDataVariables>(FormData)
+
+
+const requiredDate = (date: string) => {
+  if (date === 'minDate') {
+    return `required|date_after:${new Date().toISOString().split('T')[0]}`;
+  } else if (date === 'today') {
+    return new Date().toISOString().split('T')[0];
+  } else {
+    return '';
+  }
+};
+
+const currentDate = new Date();
+const formattedCountDate = currentDate.getFullYear().toString() +
+  (currentDate.getMonth() + 1).toString().padStart(2, '0') +
+  currentDate.getDate().toString().padStart(2, '0');
+
+
 
 const reservationData = computed(() => [
   {
@@ -286,8 +317,11 @@ const config = useRuntimeConfig()
 
 const updateSelectedCar = (carName: string) => {
   formData.selectedCar = carName
+  chapter.value += 1
 }
-
+const chapterChange = () => {
+    chapter.value += 1
+  }
 const submitForm = async () => {
     try {
       const response = await axios.post(
@@ -295,23 +329,103 @@ const submitForm = async () => {
         {
           personalizations:[
             {
-              to: [{ email: 'elmirmammadli18@gmail.com' }],
-              subject: 'Your reservation is confirmed'
+              to: [
+                { 
+                  email: formData.email, 
+                  name: 'Learn to edit dynamic templates'
+                }
+                
+              ],
+              dynamic_template_data: {
+                nasadasdme: formData.firstName,
+                surname: formData.lastName,
+                from: formData.from,
+                to: formData.to,
+                date: formattedDate.value,
+                time: formatTime.value,
+                luggage: formData.luggage,
+                selectedCar: formData.selectedCar,
+                flightNumber: formData.flightNumber,
+                number: formData.phoneNumber,
+                email: formData.email,
+                passengers: formData.passengers,
+                childSeat: checked.value,
+                orderCount: formattedCountDate
+              }
+              // cc: [{ email: 'hackrecaz@gmail.com' }],
+              // subject: `${formData.firstName} ${formData.lastName} - ${$t('form.booking-details')}`
             }
           ],
-          from: { email: 'booking@taxi2airport.cz' },
-          content: [
-            {
-              type: 'text/html',
-              value: `
-              <h1>Thank you for your reservation</h1>
-              <p>Dear ${formData.firstName} ${formData.lastName},</p>
-              <p>Thank you for your reservation. We will contact you shortly to confirm your booking.</p>
-              <p>Kind regards,</p>
-              <p>Taxi2Airport</p>
-              `
-            }
-          ]
+          template_id: 'd-f825ae80a73f4c988e0a289fdf6bef92',
+          from: { email: 'booking@taxi2airport.cz' }
+  //         content: [
+  //           {
+  //             type: 'text/html',
+  //             value: `
+  //             <h1>Thank you for your reservation</h1>
+  //             <p>Dear ${formData.firstName} ${formData.lastName},</p>
+  //             <p>Thank you for your reservation. You can find your booking details below:</p>
+  //             <table class="border-collapse w-full border border-black bg-white">
+  //   <tr>
+  //     <th class="border border-black p-2">Name</th>
+  //     <th class="border border-black p-2">Value</th>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.name').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.firstName}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.surname').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.lastName}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.from').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.from}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.to').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.to}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.date').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.formattedDate}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.time').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.formatTime}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.luggage').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.luggage} pcs</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.selected-car').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.selectedCar}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.flight-number').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.flightNumber}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.number').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.phoneNumber}</td>
+  //   </tr>
+  //   <tr>
+  //     <td class="border border-black p-2">${$t('form.email').toUpperCase()}</td>
+  //     <td class="border border-black p-2">${formData.email}</td>
+  //   </tr>
+  // </table>
+
+
+  //             <p>We will contact you shortly to confirm your booking.</p>
+
+  //             <p>Thank you for choosing us</p>
+
+  //             <p>Kind regards,</p>
+  //             <p>Taxi2Airport</p>
+  //             `
+  //           }
+  //         ]
         },
         {
           headers: {
@@ -345,4 +459,3 @@ const submitForm = async () => {
   padding-left: 12px;
 }
 </style>
-

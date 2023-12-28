@@ -49,13 +49,6 @@ const emit = defineEmits()
 const query = ref('')
 const addresses = ref([])
 
-const props = defineProps<{
-coordinates: {
-  lat: number
-  lon: number
-}
-}>()
-
 const popularLocations = [
   { icon: 'ph:airplane-tilt', display_name: "Prague Airport (PRG)"},
   { icon: 'ph:bank', display_name: "Prague City Centre (Václavské náměstí)" },

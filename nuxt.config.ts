@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     'nuxt-icon',
     '@vee-validate/nuxt',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    "@formkit/nuxt",
   ],
   i18n: {
     vueI18n: './plugins/i18n.config.ts',

@@ -44,12 +44,10 @@
             </div>
         </div>
         <Form :triggerShake="shouldShake" />
-        <FormNew />
     </div>
 </template>
 <script setup lang="ts">
 import Form from './Form.vue';
-import FormNew from './FormNew.vue';
 import axios from "axios";
 
 

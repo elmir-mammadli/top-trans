@@ -24,6 +24,7 @@
             <h1 class="font-bold text-[28px] leading-none font-inter">CZK {{ detail.price }}</h1>
             <button 
             @click="selectCar(detail.name)"
+            type="button"
             class="bg-green-400 mt-4 text-white font-semibold text-[18px] px-12 py-3 rounded-md hover:bg-green-500 transition .4s ease-all">
                         Select
                 </button>
